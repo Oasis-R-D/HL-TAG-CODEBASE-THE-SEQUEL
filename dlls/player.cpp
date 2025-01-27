@@ -249,35 +249,6 @@ int TrainSpeed(int iSpeed, int iMax)
 	return iRet;
 }
 
-void CBasePlayer::DeathSound()
-{
-	// water death sounds
-	/*
-	if (pev->waterlevel == 3)
-	{
-		EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/h2odeath.wav", 1, ATTN_NONE);
-		return;
-	}
-	*/
-
-	// temporarily using pain sounds for death sounds
-	switch (RANDOM_LONG(1, 5))
-	{
-	case 1:
-		EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_pain5.wav", 1, ATTN_NORM);
-		break;
-	case 2:
-		EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_pain6.wav", 1, ATTN_NORM);
-		break;
-	case 3:
-		EMIT_SOUND(ENT(pev), CHAN_VOICE, "player/pl_pain7.wav", 1, ATTN_NORM);
-		break;
-	}
-
-	// play one of the suit death alarms
-	EMIT_GROUPNAME_SUIT(ENT(pev), "HEV_DEAD");
-}
-
 // override takehealth
 // bitsDamageType indicates type of damage healed.
 
