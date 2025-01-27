@@ -186,9 +186,9 @@ class CItemSuit : public CItem
 			return false;
 
 		if ((pev->spawnflags & SF_SUIT_SHORTLOGON) != 0)
-			EMIT_SOUND_SUIT(pPlayer->edict(), "!HEV_A0"); // short version of suit logon,
+			EMIT_SOUND_SUIT(pPlayer->edict(), "!NOSND"); // short version of suit logon,
 		else
-			EMIT_SOUND_SUIT(pPlayer->edict(), "!HEV_AAx"); // long version of suit logon
+			EMIT_SOUND_SUIT(pPlayer->edict(), "!NOSND"); // long version of suit logon
 
 		pPlayer->SetHasSuit(true);
 		return true;
@@ -269,7 +269,7 @@ class CItemAntidote : public CItem
 	}
 	bool MyTouch(CBasePlayer* pPlayer) override
 	{
-		pPlayer->SetSuitUpdate("!HEV_DET4", false, SUIT_NEXT_IN_1MIN);
+		pPlayer->SetSuitUpdate("!NOSND", false, SUIT_NEXT_IN_1MIN);
 
 		pPlayer->m_rgItems[ITEM_ANTIDOTE] += 1;
 		return true;
@@ -329,7 +329,7 @@ class CItemLongJump : public CItem
 			WRITE_STRING(STRING(pev->classname));
 			MESSAGE_END();
 
-			EMIT_SOUND_SUIT(pPlayer->edict(), "!HEV_A1"); // Play the longjump sound UNDONE: Kelly? correct sound?
+			EMIT_SOUND_SUIT(pPlayer->edict(), "!NOSND"); // Play the longjump sound UNDONE: Kelly? correct sound?
 			return true;
 		}
 		return false;
