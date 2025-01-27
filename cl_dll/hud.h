@@ -18,13 +18,14 @@
 // class CHud declaration
 //
 // CHud handles the message, calculation, and drawing the HUD
-//
+//				vvvvvvvvvvvvv Yellowish replaced with a more orange color for orange team, blue for blue team hud
 
 #pragma once
 
-#define RGB_YELLOWISH 0x00FFA000 //255,160,0
+#define RGB_YELLOWISH 0x00FFA500 //255,165,0
 #define RGB_REDISH 0x00FF1010	 //255,160,0
 #define RGB_GREENISH 0x0000A000	 //0,160,0
+#define RGB_BLUE 0x000532b9	 //5,50,185
 
 #include "common_types.h"
 #include "cl_dll.h"
