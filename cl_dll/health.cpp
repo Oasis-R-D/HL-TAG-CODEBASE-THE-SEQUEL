@@ -30,8 +30,8 @@
 DECLARE_MESSAGE(m_Health, Health)
 DECLARE_MESSAGE(m_Health, Damage)
 
-#define PAIN_NAME "sprites/%d_pain.spr"
-#define DAMAGE_NAME "sprites/%d_dmg.spr"
+#define PAIN_NAME "sprites/blood.spr"
+#define DAMAGE_NAME "sprites/blood.spr"
 
 int giDmgHeight, giDmgWidth;
 
