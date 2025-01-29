@@ -90,7 +90,7 @@ public:
 // weapon clip/carry ammo capacities
 #define URANIUM_MAX_CARRY 100
 #define _9MM_MAX_CARRY 250
-#define _357_MAX_CARRY 36
+#define _357_MAX_CARRY 360
 #define BUCKSHOT_MAX_CARRY 125
 #define BOLT_MAX_CARRY 50
 #define ROCKET_MAX_CARRY 5
@@ -106,7 +106,7 @@ public:
 
 //#define CROWBAR_MAX_CLIP		WEAPON_NOCLIP
 #define GLOCK_MAX_CLIP 17
-#define PYTHON_MAX_CLIP 6
+#define PYTHON_MAX_CLIP 60
 #define MP5_MAX_CLIP 50
 #define MP5_DEFAULT_AMMO 25
 #define SHOTGUN_MAX_CLIP 8
