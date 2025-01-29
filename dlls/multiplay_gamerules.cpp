@@ -641,7 +641,7 @@ void CHalfLifeMultiplay::DeathNotice(CBasePlayer* pVictim, entvars_t* pKiller, e
 		// team match?
 		if (g_teamplay)
 		{
-			UTIL_LogPrintf("\"%s<%i><%s><%s>\" committed suicide with \"%s\"\n",
+			UTIL_LogPrintf("\"%s<%i><%s><%s>\" committed self deletion with \"%s\"\n",
 				STRING(pVictim->pev->netname),
 				GETPLAYERUSERID(pVictim->edict()),
 				GETPLAYERAUTHID(pVictim->edict()),
@@ -650,7 +650,7 @@ void CHalfLifeMultiplay::DeathNotice(CBasePlayer* pVictim, entvars_t* pKiller, e
 		}
 		else
 		{
-			UTIL_LogPrintf("\"%s<%i><%s><%i>\" committed suicide with \"%s\"\n",
+			UTIL_LogPrintf("\"%s<%i><%s><%i>\" committed self deletion with \"%s\"\n",
 				STRING(pVictim->pev->netname),
 				GETPLAYERUSERID(pVictim->edict()),
 				GETPLAYERAUTHID(pVictim->edict()),
@@ -695,7 +695,7 @@ void CHalfLifeMultiplay::DeathNotice(CBasePlayer* pVictim, entvars_t* pKiller, e
 		// team match?
 		if (g_teamplay)
 		{
-			UTIL_LogPrintf("\"%s<%i><%s><%s>\" committed suicide with \"%s\" (world)\n",
+			UTIL_LogPrintf("\"%s<%i><%s><%s>\" committed self deletion with \"%s\" (world)\n",
 				STRING(pVictim->pev->netname),
 				GETPLAYERUSERID(pVictim->edict()),
 				GETPLAYERAUTHID(pVictim->edict()),
@@ -704,7 +704,7 @@ void CHalfLifeMultiplay::DeathNotice(CBasePlayer* pVictim, entvars_t* pKiller, e
 		}
 		else
 		{
-			UTIL_LogPrintf("\"%s<%i><%s><%i>\" committed suicide with \"%s\" (world)\n",
+			UTIL_LogPrintf("\"%s<%i><%s><%i>\" committed self deletion with \"%s\" (world)\n",
 				STRING(pVictim->pev->netname),
 				GETPLAYERUSERID(pVictim->edict()),
 				GETPLAYERAUTHID(pVictim->edict()),
@@ -1601,7 +1601,7 @@ void CHalfLifeMultiplay::SendMOTDToClient(edict_t* client)
 //=========================================================
 //=========================================================
 
-#define EGON_BUSTING_TIME 10
+#define EGON_BUSTING_TIME 10 // what the hell is this?!
 
 bool IsBustingGame()
 {
@@ -1649,11 +1649,11 @@ void CMultiplayBusters::Think()
 //=========================================================
 int CMultiplayBusters::IPointsForKill(CBasePlayer* pAttacker, CBasePlayer* pKilled)
 {
-	// If the attacker is busting, they get a point per kill
+	// If the attacker is busting, they get a point per kill <-- niceeeee...
 	if (IsPlayerBusting(pAttacker))
 		return 1;
 
-	// If the victim is busting, then the attacker gets a point
+	// If the victim is busting, then the attacker gets a point <-- niceeeeeeeeeeeee...
 	if (IsPlayerBusting(pKilled))
 		return 2;
 
@@ -1665,7 +1665,7 @@ void CMultiplayBusters::PlayerKilled(CBasePlayer* pVictim, entvars_t* pKiller, e
 {
 	if (IsPlayerBusting(pVictim))
 	{
-		UTIL_ClientPrintAll(HUD_PRINTCENTER, "The Buster is dead!!");
+		UTIL_ClientPrintAll(HUD_PRINTCENTER, "The Buster is dead!!"); // :skull:
 
 		// Reset egon check time
 		m_flEgonBustingCheckTime = -1;
