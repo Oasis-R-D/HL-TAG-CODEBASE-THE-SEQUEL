@@ -58,6 +58,10 @@ bool CHudGeiger::MsgFunc_Geiger(const char* pszName, int iSize, void* pbuf)
 
 	m_iFlags |= HUD_ACTIVE;
 
-	return true;
+return true;
 }
 
+bool CHudGeiger::Draw(float flTime)
+{
+	
+}
