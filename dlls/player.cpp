@@ -2173,7 +2173,7 @@ void CBasePlayer::CheckTimeBasedDamage()
 					{
 						m_rgbTimeBasedDamage[i] = 0;
 						m_rgItems[ITEM_ANTIDOTE]--;
-						SetSuitUpdate("!HEV_HEAL4", false, SUIT_REPEAT_OK);
+						SetSuitUpdate("!NOSND", false, SUIT_REPEAT_OK);
 					}
 				}
 
