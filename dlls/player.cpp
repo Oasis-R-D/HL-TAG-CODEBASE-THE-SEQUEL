@@ -248,6 +248,11 @@ int TrainSpeed(int iSpeed, int iMax)
 
 	return iRet;
 }
+// removed death sound vvvvv
+void CBasePlayer::DeathSound()
+{
+	
+}
 
 // override takehealth
 // bitsDamageType indicates type of damage healed.
