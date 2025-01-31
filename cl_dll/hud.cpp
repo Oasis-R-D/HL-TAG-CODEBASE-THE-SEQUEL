@@ -331,7 +331,7 @@ void CHud::Init()
 	default_fov = CVAR_CREATE("default_fov", "90", FCVAR_ARCHIVE);
 	m_pCvarStealMouse = CVAR_CREATE("hud_capturemouse", "1", FCVAR_ARCHIVE);
 	m_pCvarDraw = CVAR_CREATE("hud_draw", "1", FCVAR_ARCHIVE);
-	cl_lw = gEngfuncs.pfnGetCvarPointer("cl_lw");
+	cl_lw = gEngfuncs.pfnGetCvarPointer("cl_lw");   // No idea how, but needs killed
 	cl_rollangle = CVAR_CREATE("cl_rollangle", "2.0", FCVAR_ARCHIVE);
 	cl_rollspeed = CVAR_CREATE("cl_rollspeed", "200", FCVAR_ARCHIVE);
 	cl_bobtilt = CVAR_CREATE("cl_bobtilt", "0", FCVAR_ARCHIVE);
@@ -637,7 +637,7 @@ bool CHud::MsgFunc_SetFOV(const char* pszName, int iSize, void* pbuf)
 	int newfov = READ_BYTE();
 	int def_fov = CVAR_GET_FLOAT("default_fov");
 
-	//Weapon prediction already takes care of changing the fog. ( g_lastFOV ).
+	//Weapon prediction already takes care of changing the fov. ( g_lastFOV ).
 	//But it doesn't restore correctly so this still needs to be used
 	/*
 	if ( cl_lw && cl_lw->value )
