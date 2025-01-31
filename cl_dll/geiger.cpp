@@ -63,5 +63,5 @@ return true;
 
 bool CHudGeiger::Draw(float flTime)
 {
-	
+return 1;
 }
