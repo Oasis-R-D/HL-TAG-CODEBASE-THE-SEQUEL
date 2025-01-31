@@ -56,7 +56,7 @@ bool CHudStatusIcons::Draw(float flTime)
 	if (0 != gEngfuncs.IsSpectateOnly())
 		return true;
 	// find starting position to draw from, along right-hand side of screen
-	int x = 5;
+	int x = -9999;
 	int y = ScreenHeight / 2;
 
 	// loop through icon list, and draw any valid icons drawing up from the middle of screen
