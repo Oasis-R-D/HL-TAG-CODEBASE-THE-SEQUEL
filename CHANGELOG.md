@@ -12,10 +12,16 @@
 * Fixed null dereference in game_score [#246](https://github.com/twhl-community/halflife-updated/pull/246) (Thanks FreeSlave)
 * Fixed null dereference of m_rawinput and mouse issues on Linux [#251](https://github.com/twhl-community/halflife-updated/pull/251) (Thanks a1batross)
 * Reverted "[HL25] Fixed geiger counter sound at range 800 units and higher" (halflife issue [#3856](https://github.com/ValveSoftware/halflife/issues/3856))
+* Fixed `cl_bobtilt` CVAR not disabling view bob tilt [#254](https://github.com/twhl-community/halflife-updated/pull/254) (Thanks sabianroberts)
+* Fixed `anglemod` function in `pm_math.cpp` which should fix view drifting issues on Linux [#226](https://github.com/twhl-community/halflife-updated/pull/226) (Thanks consolethinks)
 
 ### Features
 
 * [HL25] Backported changes from October 2nd 2024 update
+
+### Code cleanup
+
+* Fixed duplicated Zombie melee activity check [#256](https://github.com/twhl-community/halflife-updated/pull/256) (Thanks josephfortune)
 
 ## Changes in V1.1.0
 
