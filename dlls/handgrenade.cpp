@@ -81,6 +81,7 @@ bool CHandGrenade::CanHolster()
 void CHandGrenade::Holster()
 {
 	//Stop any throw that was in process so players don't blow themselves or somebody else up when the weapon is deployed again.
+	// ^^^^ lame.
 	m_flStartThrow = 0;
 
 	m_pPlayer->m_flNextAttack = UTIL_WeaponTimeBase() + 0.5;
@@ -97,7 +98,7 @@ void CHandGrenade::Holster()
 		pev->nextthink = gpGlobals->time + 0.1;
 	}
 
-	EMIT_SOUND(ENT(m_pPlayer->pev), CHAN_WEAPON, "common/null.wav", 1.0, ATTN_NORM);
+	EMIT_SOUND(ENT(m_pPlayer->pev), CHAN_WEAPON, "common/null.wav", 1.0, ATTN_NORM); // why does this code exist to do nothing?
 }
 
 void CHandGrenade::PrimaryAttack()
@@ -146,7 +147,7 @@ void CHandGrenade::WeaponIdle()
 		if (time < 0)
 			time = 0;
 
-		CGrenade::ShootTimed(m_pPlayer->pev, vecSrc, vecThrow, time);
+		CGrenade::ShootTimed(m_pPlayer->pev, vecSrc, vecThrow, time); // Is this broadcasting the values to whatever function throws the grenade?
 
 		if (flVel < 500)
 		{
