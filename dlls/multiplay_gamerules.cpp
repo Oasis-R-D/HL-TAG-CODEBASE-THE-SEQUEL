@@ -489,6 +489,7 @@ bool CHalfLifeMultiplay::AllowAutoTargetCrosshair()
 //=========================================================
 // IPointsForKill - how many points awarded to anyone
 // that kills this player?
+	// this code could be used for granting money on kill
 //=========================================================
 int CHalfLifeMultiplay::IPointsForKill(CBasePlayer* pAttacker, CBasePlayer* pKilled)
 {
@@ -498,6 +499,7 @@ int CHalfLifeMultiplay::IPointsForKill(CBasePlayer* pAttacker, CBasePlayer* pKil
 
 //=========================================================
 // PlayerKilled - someone/something killed this player
+			// ^^^^ skill issue
 //=========================================================
 void CHalfLifeMultiplay::PlayerKilled(CBasePlayer* pVictim, entvars_t* pKiller, entvars_t* pInflictor)
 {
@@ -564,11 +566,6 @@ void CHalfLifeMultiplay::PlayerKilled(CBasePlayer* pVictim, entvars_t* pKiller, 
 
 		// let the killer paint another decal as soon as he'd like.
 		PK->m_flNextDecalTime = gpGlobals->time;
-	}
-
-	if (pVictim->HasNamedPlayerItem("weapon_satchel"))
-	{
-		DeactivateSatchels(pVictim);
 	}
 }
 
