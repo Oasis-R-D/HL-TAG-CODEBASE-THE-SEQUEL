@@ -53,7 +53,7 @@ Vector previousorigin;
 CGlock g_Glock;
 CCrowbar g_Crowbar;
 CPython g_Python;
-CMP5 g_Mp5;
+CReckonMKIII g_Reckon_MKIII;
 CCrossbow g_Crossbow;
 CShotgun g_Shotgun;
 CRpg g_Rpg;
@@ -453,7 +453,7 @@ void HUD_InitClientWeapons()
 	HUD_PrepEntity(&g_Glock, &player);
 	HUD_PrepEntity(&g_Crowbar, &player);
 	HUD_PrepEntity(&g_Python, &player);
-	HUD_PrepEntity(&g_Mp5, &player);
+	HUD_PrepEntity(&g_Reckon_MKIII, &player);
 	HUD_PrepEntity(&g_Crossbow, &player);
 	HUD_PrepEntity(&g_Shotgun, &player);
 	HUD_PrepEntity(&g_Rpg, &player);
@@ -543,8 +543,8 @@ void HUD_WeaponsPostThink(local_state_s* from, local_state_s* to, usercmd_t* cmd
 		pWeapon = &g_Python;
 		break;
 
-	case WEAPON_MP5:
-		pWeapon = &g_Mp5;
+	case WEAPON_RECKONMKIII:
+		pWeapon = &g_Reckon_MKIII;
 		break;
 
 	case WEAPON_CROSSBOW:

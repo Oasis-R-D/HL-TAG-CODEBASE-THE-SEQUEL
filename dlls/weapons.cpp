@@ -286,7 +286,7 @@ void W_Precache()
 	UTIL_PrecacheOther("ammo_9mmclip");
 
 	// mp5
-	UTIL_PrecacheOtherWeapon("weapon_9mmAR");
+	UTIL_PrecacheOtherWeapon("weapon_reckonmkiii");
 	UTIL_PrecacheOther("ammo_9mmAR");
 	UTIL_PrecacheOther("ammo_ARgrenades");
 

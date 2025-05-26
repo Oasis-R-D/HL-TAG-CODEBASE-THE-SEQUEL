@@ -44,6 +44,8 @@
 
 // #define DUCKFIX
 
+extern int DartCounter;
+
 extern void CopyToBodyQue(entvars_t* pev);
 extern edict_t* EntSelectSpawnPoint(CBaseEntity* pPlayer);
 
@@ -2622,6 +2624,8 @@ void CBasePlayer::PostThink()
 	// do weapon stuff
 	ItemPostFrame();
 
+	ALERT(at_console, "inactive darts in server: %d\n", DartCounter);
+
 	// check to see if player landed hard enough to make a sound
 	// falling farther than half of the maximum safe distance, but not as far a max safe distance will
 	// play a bootscrape sound, and no damage will be inflicted. Fallling a distance shorter than half
@@ -3592,7 +3596,7 @@ void CBasePlayer::CheatImpulseCommands(int iImpulse)
 		GiveNamedItem("ammo_9mmclip");
 		GiveNamedItem("weapon_shotgun");
 		GiveNamedItem("ammo_buckshot");
-		GiveNamedItem("weapon_9mmAR");
+		GiveNamedItem("weapon_reckonmkiii");
 		GiveNamedItem("ammo_9mmAR");
 		GiveNamedItem("ammo_ARgrenades");
 		GiveNamedItem("weapon_handgrenade");

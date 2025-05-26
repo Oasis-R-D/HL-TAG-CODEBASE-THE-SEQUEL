@@ -1,6 +1,10 @@
 // studio_model.cpp
 // routines for setting up to draw 3DStudio models
 
+#include "windows.h"
+#include "gl/glew.h"
+#include "gl/gl.h"
+
 #include "hud.h"
 #include "cl_util.h"
 #include "const.h"
@@ -51,6 +55,7 @@ void CStudioModelRenderer::Init()
 	m_pCvarHiModels = IEngineStudio.GetCvar("cl_himodels");
 	m_pCvarDeveloper = IEngineStudio.GetCvar("developer");
 	m_pCvarDrawEntities = IEngineStudio.GetCvar("r_drawentities");
+	m_pCvarViewmodelFov = gEngfuncs.pfnRegisterVariable("viewmodel_fov", "70", FCVAR_ARCHIVE);
 
 	m_pChromeSprite = IEngineStudio.GetChromeSprite();
 
@@ -77,6 +82,7 @@ CStudioModelRenderer::CStudioModelRenderer()
 	m_pCvarHiModels = NULL;
 	m_pCvarDeveloper = NULL;
 	m_pCvarDrawEntities = NULL;
+	m_pCvarViewmodelFov = NULL;
 	m_pChromeSprite = NULL;
 	m_pStudioModelCount = NULL;
 	m_pModelsDrawn = NULL;
@@ -1597,6 +1603,33 @@ void CStudioModelRenderer::StudioRenderModel()
 {
 	IEngineStudio.SetChromeOrigin();
 	IEngineStudio.SetForceFaceFlags(0);
+
+	if (m_pCurrentEntity == gEngfuncs.GetViewModel())
+	{
+		if (m_pCvarViewmodelFov->value < 1 || m_pCvarViewmodelFov->value > 179)
+		{
+			gEngfuncs.Cvar_SetValue("viewmodel_fov", 0);
+			return;
+		}
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+
+		GLfloat _near = 3.0f;
+		GLfloat _far = 4096.0f;
+		float fovY = m_pCvarViewmodelFov->value;
+		float aspect = (float)ScreenWidth / (float)ScreenHeight;
+
+		// Convert degrees to radians and calculate top
+		float top = tan(fovY * 0.5f * (M_PI / 180.0f)) * _near;
+		float bottom = -top;
+		float right = top * aspect;
+		float left = -right;
+
+		glFrustum(left, right, bottom, top, _near, _far);
+
+		glMatrixMode(GL_MODELVIEW);
+	}
 
 	if (m_pCurrentEntity->curstate.renderfx == kRenderFxGlowShell)
 	{

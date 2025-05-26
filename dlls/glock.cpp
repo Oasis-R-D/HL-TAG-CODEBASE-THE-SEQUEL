@@ -129,7 +129,6 @@ void CGlock::GlockFire(float flSpread, float flCycleTime, bool fUseAutoAim)
 		m_pPlayer->m_iWeaponFlash = NORMAL_GUN_FLASH;
 	}
 
-	Vector vecSrc = m_pPlayer->GetGunPosition();
 	Vector vecAiming;
 
 	if (fUseAutoAim)
@@ -141,10 +140,26 @@ void CGlock::GlockFire(float flSpread, float flCycleTime, bool fUseAutoAim)
 		vecAiming = gpGlobals->v_forward;
 	}
 
-	Vector vecDir;
-	vecDir = m_pPlayer->FireBulletsPlayer(1, vecSrc, vecAiming, Vector(flSpread, flSpread, flSpread), 8192, BULLET_PLAYER_9MM, 0, 0, m_pPlayer->pev, m_pPlayer->random_seed);
+	//vecDir = m_pPlayer->FireBulletsPlayer(1, vecSrc, vecAiming, Vector(flSpread, flSpread, flSpread), 8192, BULLET_PLAYER_9MM, 0, 0, m_pPlayer->pev, m_pPlayer->random_seed);
 
-	PLAYBACK_EVENT_FULL(flags, m_pPlayer->edict(), fUseAutoAim ? m_usFireGlock1 : m_usFireGlock2, 0.0, g_vecZero, g_vecZero, vecDir.x, vecDir.y, 0, 0, (m_iClip == 0) ? 1 : 0, 0);
+	#ifndef CLIENT_DLL
+
+	Vector anglesAim = m_pPlayer->pev->v_angle + m_pPlayer->pev->punchangle;
+	UTIL_MakeVectors(anglesAim);
+	Vector vecSrc = m_pPlayer->GetGunPosition() - gpGlobals->v_up * 2;
+
+	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
+	pDart->pev->origin = vecSrc;
+	anglesAim.x *= -1; // cuz for some reason pitch angle is inverted in this model
+	pDart->pev->angles = anglesAim;
+	pDart->pev->owner = m_pPlayer->edict();
+
+	pDart->pev->velocity = vecAiming * DART_AIR_VELOCITY;
+	pDart->pev->speed = DART_AIR_VELOCITY;
+	pDart->pev->avelocity.z = 10;
+	#endif
+
+	PLAYBACK_EVENT_FULL(flags, m_pPlayer->edict(), fUseAutoAim ? m_usFireGlock1 : m_usFireGlock2, 0.0, g_vecZero, g_vecZero, vecAiming.x, vecAiming.y, 0, 0, (m_iClip == 0) ? 1 : 0, 0);
 
 	m_flNextPrimaryAttack = m_flNextSecondaryAttack = GetNextAttackDelay(flCycleTime);
 

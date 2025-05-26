@@ -60,8 +60,8 @@ public:
 	float m_fFade;
 
 private:
-	HSPRITE m_hSprite;
-	HSPRITE m_hDamage;
+	HSPRITE_ m_hSprite;
+	HSPRITE_ m_hDamage;
 
 	DAMAGE_IMAGE m_dmg[NUM_DMG_TYPES];
 	int m_bitsDamage;

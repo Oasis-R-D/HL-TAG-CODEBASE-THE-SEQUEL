@@ -36,6 +36,8 @@
 
 CGlobalState gGlobalState;
 
+int DartCounter;
+
 extern void W_Precache();
 
 //
@@ -497,6 +499,7 @@ void CWorld::Spawn()
 {
 	g_fGameOver = false;
 	Precache();
+	DartCounter = 0;
 }
 
 void CWorld::Precache()

@@ -74,7 +74,7 @@ public:
 #define CROWBAR_WEIGHT 0
 #define GLOCK_WEIGHT 10
 #define PYTHON_WEIGHT 15
-#define MP5_WEIGHT 15
+#define RECKONMKIII_WEIGHT 15
 #define SHOTGUN_WEIGHT 15
 #define CROSSBOW_WEIGHT 10
 #define RPG_WEIGHT 20
@@ -107,7 +107,7 @@ public:
 //#define CROWBAR_MAX_CLIP		WEAPON_NOCLIP
 #define GLOCK_MAX_CLIP 17
 #define PYTHON_MAX_CLIP 999
-#define MP5_MAX_CLIP 50
+#define RECKONMK3_MAX_CLIP 16
 #define MP5_DEFAULT_AMMO 25
 #define SHOTGUN_MAX_CLIP 8
 #define CROSSBOW_MAX_CLIP 5
@@ -124,7 +124,7 @@ public:
 // the default amount of ammo that comes with each gun when it spawns
 #define GLOCK_DEFAULT_GIVE 17
 #define PYTHON_DEFAULT_GIVE 999
-#define MP5_DEFAULT_GIVE 25
+#define RECKONMKIII_DEFAULT_GIVE 25
 #define MP5_DEFAULT_AMMO 25
 #define MP5_M203_DEFAULT_GIVE 0
 #define SHOTGUN_DEFAULT_GIVE 12
@@ -142,7 +142,7 @@ public:
 #define AMMO_URANIUMBOX_GIVE 20
 #define AMMO_GLOCKCLIP_GIVE GLOCK_MAX_CLIP
 #define AMMO_357BOX_GIVE PYTHON_MAX_CLIP
-#define AMMO_MP5CLIP_GIVE MP5_MAX_CLIP
+#define AMMO_MP5CLIP_GIVE RECKONMK3_MAX_CLIP
 #define AMMO_CHAINBOX_GIVE 200
 #define AMMO_M203BOX_GIVE 2
 #define AMMO_BUCKSHOTBOX_GIVE 12
@@ -439,6 +439,28 @@ inline MULTIDAMAGE gMultiDamage;
 #define VECTOR_CONE_15DEGREES Vector(0.13053, 0.13053, 0.13053)
 #define VECTOR_CONE_20DEGREES Vector(0.17365, 0.17365, 0.17365)
 
+
+#define DART_AIR_VELOCITY 1300
+
+#ifndef CLIENT_DLL
+class CDart : public CBaseEntity
+{
+	void Spawn() override;
+	void Precache() override;
+	int Classify() override;
+	void EXPORT DartTouch(CBaseEntity* pOther);
+	void EXPORT PickupThink();
+
+	int m_iTrail;
+	float m_flDieTime;
+	bool inactive; // whether this dart is just a pickable dart or is flying through the air
+	string_t ammotype;
+
+public:
+	static CDart* DartCreate(string_t customammotype);
+};
+#endif
+
 //=========================================================
 // CWeaponBox - a single entity that can store weapons
 // and ammo.
@@ -604,19 +626,15 @@ private:
 	unsigned short m_usFirePython;
 };
 
-enum mp5_e
+enum reckonmkii_e
 {
-	MP5_LONGIDLE = 0,
-	MP5_IDLE1,
-	MP5_LAUNCH,
-	MP5_RELOAD,
-	MP5_DEPLOY,
-	MP5_FIRE1,
-	MP5_FIRE2,
-	MP5_FIRE3,
+	RECKONMK3_DRAW = 0,
+	RECKONMK3_IDLE,
+	RECKONMK3_SHOOT,
+	RECKONMK3_RELOAD,
 };
 
-class CMP5 : public CBasePlayerWeapon
+class CReckonMKIII : public CBasePlayerWeapon
 {
 public:
 	void Spawn() override;
@@ -642,7 +660,7 @@ public:
 	}
 
 private:
-	unsigned short m_usMP5;
+	unsigned short m_usReckonMKIII;
 	unsigned short m_usMP52;
 };
 
@@ -695,16 +713,9 @@ private:
 
 enum shotgun_e
 {
-	SHOTGUN_IDLE = 0,
-	SHOTGUN_FIRE,
-	SHOTGUN_FIRE2,
-	SHOTGUN_RELOAD,
-	SHOTGUN_PUMP,
-	SHOTGUN_START_RELOAD,
-	SHOTGUN_DRAW,
-	SHOTGUN_HOLSTER,
-	SHOTGUN_IDLE4,
-	SHOTGUN_IDLE_DEEP
+	SHOTGUN_DRAW = 0,
+	SHOTGUN_IDLE,
+	SHOTGUN_SHOOT
 };
 
 class CShotgun : public CBasePlayerWeapon

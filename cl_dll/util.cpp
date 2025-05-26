@@ -25,7 +25,7 @@
 #include "cl_util.h"
 #include <string.h>
 
-HSPRITE LoadSprite(const char* pszName)
+HSPRITE_ LoadSprite(const char* pszName)
 {
 	int iRes;
 	char sz[256]; 
