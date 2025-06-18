@@ -132,7 +132,7 @@ void CCrowbar::PrimaryAttack()
 	if (!Swing(true))
 	{
 		SetThink(&CCrowbar::SwingAgain);
-		pev->nextthink = gpGlobals->time + 0.5;
+		pev->nextthink = gpGlobals->time + 0.1;
 	}
 }
 
@@ -228,6 +228,11 @@ bool CCrowbar::Swing(bool fFirst)
 		{
 			// first swing does full damage
 			pEntity->TraceAttack(m_pPlayer->pev, gSkillData.plrDmgCrowbar, gpGlobals->v_forward, &tr, DMG_CLUB);
+		}
+		else
+		{
+			// subsequent swings do half
+			pEntity->TraceAttack(m_pPlayer->pev, gSkillData.plrDmgCrowbar / 2, gpGlobals->v_forward, &tr, DMG_CLUB);
 		}
 		ApplyMultiDamage(m_pPlayer->pev, m_pPlayer->pev);
 
