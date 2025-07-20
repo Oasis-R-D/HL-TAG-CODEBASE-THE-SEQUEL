@@ -138,7 +138,7 @@ void CShotgun::PrimaryAttack()
 		pDart->pev->angles = anglesAim;
 		pDart->pev->owner = m_pPlayer->edict();
 
-		pDart->pev->velocity = vecDir * DART_AIR_VELOCITY;
+		pDart->pev->velocity = (vecDir * DART_AIR_VELOCITY) + 20;
 		pDart->pev->speed = DART_AIR_VELOCITY;
 		pDart->pev->avelocity.z = 10;
 	}

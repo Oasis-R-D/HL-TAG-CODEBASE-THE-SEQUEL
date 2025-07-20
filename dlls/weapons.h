@@ -440,7 +440,7 @@ inline MULTIDAMAGE gMultiDamage;
 #define VECTOR_CONE_20DEGREES Vector(0.17365, 0.17365, 0.17365)
 
 
-#define DART_AIR_VELOCITY 1300
+#define DART_AIR_VELOCITY 2600
 
 #ifndef CLIENT_DLL
 class CDart : public CBaseEntity
