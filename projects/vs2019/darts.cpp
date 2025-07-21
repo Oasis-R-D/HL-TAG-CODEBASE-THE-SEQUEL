@@ -104,7 +104,6 @@ void CDart::Spawn()
 	Precache();
 	pev->movetype = MOVETYPE_BOUNCE;
 	pev->solid = SOLID_BBOX;
-
 	SET_MODEL(ENT(pev), "models/bludart.mdl");
 
 	UTIL_SetSize(pev, Vector(0, 0, 0), Vector(0, 0, 0));
@@ -151,6 +150,7 @@ void CDart::DartTouch(CBaseEntity* pOther)
 		}
 
 		ApplyMultiDamage(pev, pevOwner);
+		EMIT_SOUND(ENT(pev), CHAN_ITEM, "dart/hit_living.wav", 1, ATTN_NORM);
 	}
 	if (DartCounter <= 75)
 	{

@@ -61,7 +61,7 @@ void CReckonMKIII::Precache()
 	PRECACHE_SOUND("weapons/Mk3/Magout.wav");
 	PRECACHE_SOUND("weapons/Mk3/Slideclose.wav");
 	PRECACHE_SOUND("weapons/Mk3/SlideOpen.wav");
-
+	PRECACHE_SOUND("dart/hit_living.wav");
 	PRECACHE_SOUND("weapons/hks1.wav"); // H to the K representing the a b q waddup biaatch leave it at the toone
 	PRECACHE_SOUND("weapons/hks2.wav"); // H to the K
 	PRECACHE_SOUND("weapons/hks3.wav"); // H to the K

@@ -63,7 +63,7 @@ void CPython::Precache()
 
 	PRECACHE_MODEL("models/w_357ammobox.mdl");
 	PRECACHE_SOUND("items/9mmclip1.wav");
-
+	PRECACHE_SOUND("dart/hit_living.wav");
 	PRECACHE_SOUND("weapons/357_reload1.wav");
 	PRECACHE_SOUND("weapons/357_cock1.wav");
 	PRECACHE_SOUND("weapons/357_shot1.wav");
@@ -163,12 +163,26 @@ void CPython::PrimaryAttack()
 
 	UTIL_MakeVectors(m_pPlayer->pev->v_angle + m_pPlayer->pev->punchangle);
 
-	Vector vecSrc = m_pPlayer->GetGunPosition();
 	Vector vecAiming = m_pPlayer->GetAutoaimVector(AUTOAIM_10DEGREES);
 
 	Vector vecDir;
-	vecDir = m_pPlayer->FireBulletsPlayer(1, vecSrc, vecAiming, VECTOR_CONE_1DEGREES, 8192, BULLET_PLAYER_357, 0, 0, m_pPlayer->pev, m_pPlayer->random_seed);
+	//vecDir = m_pPlayer->FireBulletsPlayer(1, vecSrc, vecAiming, VECTOR_CONE_1DEGREES, 8192, BULLET_PLAYER_357, 0, 0, m_pPlayer->pev, m_pPlayer->random_seed);
+#ifndef CLIENT_DLL
 
+	Vector anglesAim = m_pPlayer->pev->v_angle + m_pPlayer->pev->punchangle;
+	UTIL_MakeVectors(anglesAim);
+	Vector vecSrc = m_pPlayer->GetGunPosition() - gpGlobals->v_up * 2;
+
+	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
+	pDart->pev->origin = vecSrc;
+	anglesAim.x *= -1; // cuz for some reason pitch angle is inverted in this model
+	pDart->pev->angles = anglesAim;
+	pDart->pev->owner = m_pPlayer->edict();
+
+	pDart->pev->velocity = vecAiming * DART_AIR_VELOCITY;
+	pDart->pev->speed = DART_AIR_VELOCITY;
+	pDart->pev->avelocity.z = 10;
+#endif
 	int flags;
 #if defined(CLIENT_WEAPONS)
 	flags = FEV_NOTHOST;
