@@ -35,7 +35,7 @@ void CPhysicsDart::Spawn()
 
 	SetThink(&CPhysicsDart::PickupThink);
 	SetTouch(&CPhysicsDart::DartBounce);
-	m_flDieTime = gpGlobals->time + 10;
+	m_flDieTime = gpGlobals->time + 35;
 	pev->nextthink = gpGlobals->time + 0.2;
 }
 
