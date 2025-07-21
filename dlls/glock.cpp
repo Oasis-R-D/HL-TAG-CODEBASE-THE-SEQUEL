@@ -154,7 +154,7 @@ void CGlock::GlockFire(float flSpread, float flCycleTime, bool fUseAutoAim)
 	pDart->pev->angles = anglesAim;
 	pDart->pev->owner = m_pPlayer->edict();
 
-	pDart->pev->velocity = (vecAiming * DART_AIR_VELOCITY) + RANDOM_LONG(-20, 20);
+	pDart->pev->velocity = vecAiming * DART_AIR_VELOCITY;
 	pDart->pev->speed = DART_AIR_VELOCITY;
 	pDart->pev->avelocity.z = 10;
 	#endif
