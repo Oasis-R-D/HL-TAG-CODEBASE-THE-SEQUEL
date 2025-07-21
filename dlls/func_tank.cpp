@@ -749,26 +749,51 @@ void CFuncTankGun::Fire(const Vector& barrelEnd, const Vector& forward, entvars_
 			{
 				switch (m_bulletType)
 				{
-					case TANK_BULLET_9MM:
-							// FireBullets(1, barrelEnd, forward, gTankSpread[m_spread], 4096, BULLET_MONSTER_9MM, 1, m_iBulletDamage, pevAttacker);
+				case TANK_BULLET_9MM:
+				{ // FireBullets(1, barrelEnd, forward, gTankSpread[m_spread], 4096, BULLET_MONSTER_9MM, 1, m_iBulletDamage, pevAttacker);
+					Vector anglesAim = pev->angles;
+					UTIL_MakeVectors(anglesAim);
+					CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
+					pDart->pev->origin = barrelEnd;
+					anglesAim.x *= 1; // cuz for some reason pitch angle is inverted in this model
+					pDart->pev->angles = forward;
 
-							UTIL_MakeVectors(pev->angles);
+					pDart->pev->velocity = forward * DART_AIR_VELOCITY;
+					pDart->pev->speed = DART_AIR_VELOCITY;
+					pDart->pev->avelocity.z = 10;
+				}
+						break;
+
+				case TANK_BULLET_MP5:
+						{
+							//FireBullets(1, barrelEnd, forward, gTankSpread[m_spread], 4096, BULLET_MONSTER_MP5, 1, m_iBulletDamage, pevAttacker);
+							Vector anglesAim = pev->angles;
+							UTIL_MakeVectors(anglesAim);
+							CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
+							pDart->pev->origin = barrelEnd;
+							anglesAim.x *= -1; // cuz for some reason pitch angle is inverted in this model
+							pDart->pev->angles = forward;
+
+							pDart->pev->velocity = forward * DART_AIR_VELOCITY;
+							pDart->pev->speed = DART_AIR_VELOCITY;
+							pDart->pev->avelocity.z = 10;
+						}
+					break;
+
+				case TANK_BULLET_12MM:
+					{
+						//FireBullets(1, barrelEnd, forward, gTankSpread[m_spread], 4096, BULLET_MONSTER_12MM, 1, m_iBulletDamage, pevAttacker);
+						Vector anglesAim = pev->angles;
+						UTIL_MakeVectors(anglesAim);
 						CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
 						pDart->pev->origin = barrelEnd;
-						pev->angles.x *= -1; // cuz for some reason pitch angle is inverted in this model
+						anglesAim.x *= -1; // cuz for some reason pitch angle is inverted in this model
 						pDart->pev->angles = forward;
 
 						pDart->pev->velocity = forward * DART_AIR_VELOCITY;
 						pDart->pev->speed = DART_AIR_VELOCITY;
 						pDart->pev->avelocity.z = 10;
-						break;
-
-				case TANK_BULLET_MP5:
-					FireBullets(1, barrelEnd, forward, gTankSpread[m_spread], 4096, BULLET_MONSTER_MP5, 1, m_iBulletDamage, pevAttacker);
-					break;
-
-				case TANK_BULLET_12MM:
-					FireBullets(1, barrelEnd, forward, gTankSpread[m_spread], 4096, BULLET_MONSTER_12MM, 1, m_iBulletDamage, pevAttacker);
+					}
 					break;
 
 				default:
