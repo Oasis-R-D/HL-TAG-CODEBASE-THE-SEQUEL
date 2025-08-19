@@ -28,7 +28,7 @@ void CPhysicsDart::Spawn()
 {
 	pev->movetype = MOVETYPE_BOUNCE;
 	pev->solid = SOLID_BBOX;
-
+	pev->gravity = 0.5
 	SET_MODEL(ENT(pev), "models/bludart.mdl");
 
 	UTIL_SetSize(pev, Vector(0, 0, 0), Vector(0, 0, 0));
