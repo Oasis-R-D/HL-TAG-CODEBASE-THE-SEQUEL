@@ -797,13 +797,8 @@ void CHGrunt::Shoot()
 	Vector vecShellVelocity = gpGlobals->v_right * RANDOM_FLOAT(40, 90) + gpGlobals->v_up * RANDOM_FLOAT(75, 200) + gpGlobals->v_forward * RANDOM_FLOAT(-40, 40);
 	EjectBrass(vecShootOrigin - vecShootDir * 24, vecShellVelocity, pev->angles.y, m_iBrassShell, TE_BOUNCE_SHELL);
 	//FireBullets(1, vecShootOrigin, vecShootDir, VECTOR_CONE_10DEGREES, 2048, BULLET_MONSTER_MP5); // shoot +-5 degrees
-	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
-	pDart->pev->origin = vecShootOrigin;
-	pDart->pev->angles = vecShootDir;
-
-	pDart->pev->velocity = vecShootDir * DART_AIR_VELOCITY;
-	pDart->pev->speed = DART_AIR_VELOCITY;
-	pDart->pev->avelocity.z = 10;
+	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecShootOrigin, vecShootDir, 0.2, 50, 2600);
+	pDart->pev->owner = edict();
 	pev->effects |= EF_MUZZLEFLASH;
 
 	m_cAmmoLoaded--; // take away a bullet!
