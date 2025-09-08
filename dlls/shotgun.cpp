@@ -129,9 +129,9 @@ void CShotgun::PrimaryAttack()
 		Vector anglesAim = m_pPlayer->pev->v_angle + m_pPlayer->pev->punchangle;
 		UTIL_MakeVectors(anglesAim);
 		if (i == 0)
-			vecSrc += gpGlobals->v_right * 2;
+			vecSrc = vecSrc + gpGlobals->v_right * 2;
 		else
-			vecSrc -= gpGlobals->v_right * 2;
+			vecSrc = vecSrc - gpGlobals->v_right * 2;
 		
 		CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, anglesAim, 0.2, 50, 2600);	
 		pDart->pev->owner = m_pPlayer->edict();
