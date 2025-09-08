@@ -31,7 +31,7 @@ public:
 void CPhysicsDart::Spawn()  // TODO: dart type model change, circdart gets a slight vertical angle applied
 {
 	SET_MODEL(ENT(pev), "models/bludart.mdl");
-	pev->velocity = (m_direction + Vector(RANDOM_FLOAT(dart_spread, -dart_spread), RANDOM_FLOAT(dart_spread, -dart_spread), RANDOM_FLOAT(dart_spreadVert, -dart_spreadVert))) * m_muzzlevelocity; // Applies spread and velocity
+	pev->velocity = (m_direction + Vector(RANDOM_FLOAT(dart_spread, -dart_spread), RANDOM_FLOAT(dart_spread, -dart_spread), RANDOM_FLOAT(dart_spread, -dart_spread))) * m_muzzlevelocity; // Applies spread and velocity
 	pev->avelocity.z = 10; // I have no clue what this is for
 	pev->speed = m_muzzlevelocity;
 	pev->movetype = MOVETYPE_BOUNCE;
