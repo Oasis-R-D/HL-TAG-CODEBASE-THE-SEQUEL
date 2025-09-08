@@ -148,15 +148,8 @@ void CGlock::GlockFire(float flSpread, float flCycleTime, bool fUseAutoAim)
 	UTIL_MakeVectors(anglesAim);
 	Vector vecSrc = m_pPlayer->GetGunPosition() - gpGlobals->v_up * 2;
 
-	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
-	pDart->pev->origin = vecSrc;
-	anglesAim.x *= -1; // cuz for some reason pitch angle is inverted in this model
-	pDart->pev->angles = anglesAim;
+	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, anglesAim, 0.1, 50, 2600);
 	pDart->pev->owner = m_pPlayer->edict();
-
-	pDart->pev->velocity = vecAiming * DART_AIR_VELOCITY;
-	pDart->pev->speed = DART_AIR_VELOCITY;
-	pDart->pev->avelocity.z = 10;
 	#endif
 
 	PLAYBACK_EVENT_FULL(flags, m_pPlayer->edict(), fUseAutoAim ? m_usFireGlock1 : m_usFireGlock2, 0.0, g_vecZero, g_vecZero, vecAiming.x, vecAiming.y, 0, 0, (m_iClip == 0) ? 1 : 0, 0);
