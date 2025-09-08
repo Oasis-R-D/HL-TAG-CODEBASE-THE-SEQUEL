@@ -19,32 +19,47 @@ class CPhysicsDart : public CBaseEntity
 	void EXPORT PickupThink();
 	float m_flDieTime;
 	string_t ammotype;
+	int dart_speed;
+	int dart_spread;
+	int dart_dmg;
+	Vector m_direction;
+	int m_muzzlevelocity;
 
 public:
-	static CPhysicsDart* PhysDartCreate(string_t customammotype);
+	static CPhysicsDart* PhysDartCreate(string_t customammotype, Vector VecSpawnPos, Vector vecDir, float drt_spread, int drt_dmg, int drt_speed);
 };
 
-void CPhysicsDart::Spawn()
+void CPhysicsDart::Spawn()  // TODO: dart type model change, circdart gets a slight vertical angle applied
 {
+	SET_MODEL(ENT(pev), "models/bludart.mdl");
+	pev->velocity = (m_direction + Vector(RANDOM_FLOAT(dart_spread, -dart_spread), RANDOM_FLOAT(dart_spread, -dart_spread), RANDOM_FLOAT(dart_spreadVert, -dart_spreadVert))) * m_muzzlevelocity; // Applies spread and velocity
+	pev->avelocity.z = 10; // I have no clue what this is for
+	pev->speed = m_muzzlevelocity;
 	pev->movetype = MOVETYPE_BOUNCE;
 	pev->solid = SOLID_BBOX;
-	pev->gravity = 0.5;
-	SET_MODEL(ENT(pev), "models/bludart.mdl");
-
 	UTIL_SetSize(pev, Vector(0, 0, 0), Vector(0, 0, 0));
-
+	
+	pev->gravity = 0.5;
+	
 	SetThink(&CPhysicsDart::PickupThink);
 	SetTouch(&CPhysicsDart::DartBounce);
-	m_flDieTime = gpGlobals->time + 35;
+	m_flDieTime = gpGlobals->time + 60;
 	pev->nextthink = gpGlobals->time + 0.2;
 }
 
-CPhysicsDart* CPhysicsDart::PhysDartCreate(string_t customammotype)
+CPhysicsDart* CPhysicsDart::PhysDartCreate(string_t customammotype, Vector VecSpawnPos, Vector vecDir, float drt_spread, int drt_dmg, int drt_speed)
 {
 	CPhysicsDart* pBolt = GetClassPtr((CPhysicsDart*)NULL);
 	pBolt->pev->classname = MAKE_STRING("bolt");
 	pBolt->Spawn();
-
+	pBolt->pev->origin = vecSpawnPos;
+	pBolt->m_direction = vecDir;
+	vecDir.x *= -1;
+	pBolt->pev->angles = vecDir;
+	pBolt->m_muzzlevelocity = drt_speed;
+	pBolt->dart_dmg = drt_dmg;
+	pBolt->dart_spread = drt_speed;
+	pBolt->dart_spread = drt_spread
 	pBolt->pev->gravity = 0.5;
 	pBolt->pev->friction = 0.8;
 	pBolt->ammotype = customammotype;
@@ -84,7 +99,7 @@ void CPhysicsDart::PickupThink()
 
 void CPhysicsDart::DartBounce(CBaseEntity* pOther)
 {
-	pev->velocity = pev->velocity / 5;
+	pev->velocity = pev->velocity / 5; // make this dart type specific, ball darts bounce a CRAP ton
 }
 
 
@@ -116,8 +131,9 @@ void CDart::Spawn()
 
 void CDart::Precache()
 {
-	// PRECACHE_MODEL("models/bludart.mdl"); precache these in mp5
-	// PRECACHE_SOUND("weapons/primeforward.wav");
+	PRECACHE_MODEL("models/bludart.mdl"); // precache these in mp5 //why???
+	PRECACHE_MODEL("models/bigdart.mdl");
+	PRECACHE_MODEL("models/circdart.mdl");
 	PRECACHE_SOUND("fvox/beep.wav");
 	m_iTrail = PRECACHE_MODEL("sprites/streak.spr");
 }
@@ -142,11 +158,11 @@ void CDart::DartTouch(CBaseEntity* pOther)
 
 		if (pOther->IsPlayer())
 		{
-			pOther->TraceAttack(pevOwner, 10, pev->velocity.Normalize(), &tr, DMG_NEVERGIB);
+			pOther->TraceAttack(pevOwner, dart_dmg, pev->velocity.Normalize(), &tr, DMG_NEVERGIB);
 		}
 		else
 		{
-			pOther->TraceAttack(pevOwner, 10, pev->velocity.Normalize(), &tr, DMG_BULLET | DMG_NEVERGIB);
+			pOther->TraceAttack(pevOwner, dart_dmg, pev->velocity.Normalize(), &tr, DMG_BULLET | DMG_NEVERGIB);
 		}
 
 		ApplyMultiDamage(pev, pevOwner);
