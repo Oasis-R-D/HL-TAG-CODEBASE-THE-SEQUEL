@@ -128,19 +128,13 @@ void CShotgun::PrimaryAttack()
 	{
 		Vector anglesAim = m_pPlayer->pev->v_angle + m_pPlayer->pev->punchangle;
 		UTIL_MakeVectors(anglesAim);
-
-		CDart* pDart = CDart::DartCreate(ALLOC_STRING("buckshot"));
 		if (i == 0)
-			pDart->pev->origin = vecSrc + gpGlobals->v_right * 2;
+			vecSrc += gpGlobals->v_right * 2;
 		else
-			pDart->pev->origin = vecSrc - gpGlobals->v_right * 2;
-		anglesAim.x *= -1; // cuz for some reason pitch angle is inverted in this model
-		pDart->pev->angles = anglesAim;
+			vecSrc -= gpGlobals->v_right * 2;
+		
+		CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, anglesAim, 0.2, 50, 2600);	
 		pDart->pev->owner = m_pPlayer->edict();
-
-		pDart->pev->velocity = vecDir * (DART_AIR_VELOCITY + 60);
-		pDart->pev->speed = DART_AIR_VELOCITY;
-		pDart->pev->avelocity.z = 10;
 	}
 #endif
 
