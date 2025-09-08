@@ -173,15 +173,9 @@ void CPython::PrimaryAttack()
 	UTIL_MakeVectors(anglesAim);
 	Vector vecSrc = m_pPlayer->GetGunPosition() - gpGlobals->v_up * 2;
 
-	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
-	pDart->pev->origin = vecSrc;
-	anglesAim.x *= -1; // cuz for some reason pitch angle is inverted in this model
-	pDart->pev->angles = anglesAim;
+	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, anglesAim, 0.1, 50, 2600);
+	
 	pDart->pev->owner = m_pPlayer->edict();
-
-	pDart->pev->velocity = vecAiming * DART_AIR_VELOCITY;
-	pDart->pev->speed = DART_AIR_VELOCITY;
-	pDart->pev->avelocity.z = 10;
 #endif
 	int flags;
 #if defined(CLIENT_WEAPONS)
