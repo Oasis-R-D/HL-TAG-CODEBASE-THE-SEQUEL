@@ -101,12 +101,22 @@ void CPhysicsDart::DartBounce(CBaseEntity* pOther)
 }
 
 
-CDart* CDart::DartCreate(string_t customammotype)
+CDart* CDart::DartCreate(string_t customammotype, Vector VecSpawnPos, Vector vecDir, float drt_spread, int drt_dmg, int drt_speed) // what is this for
 {
 	// Create a new entity with CCrossbowBolt private data
 	CDart* pBolt = GetClassPtr((CDart*)NULL);
 	pBolt->pev->classname = MAKE_STRING("bolt");
 	pBolt->Spawn();
+	pBolt->ammotype = customammotype;
+	pBolt->pev->origin = vecSpawnPos;
+	pBolt->m_direction = vecDir;
+	vecDir.x *= -1;
+	pBolt->pev->angles = vecDir;
+	pBolt->m_muzzlevelocity = drt_speed;
+	pBolt->dart_dmg = drt_dmg;
+	pBolt->dart_spread = drt_spread;
+	pBolt->pev->gravity = 0.5;
+	pBolt->pev->friction = 0.8;
 	pBolt->ammotype = customammotype;
 
 	return pBolt;
