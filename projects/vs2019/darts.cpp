@@ -19,7 +19,6 @@ class CPhysicsDart : public CBaseEntity
 	void EXPORT PickupThink();
 	float m_flDieTime;
 	string_t ammotype;
-	int dart_speed;
 	int dart_spread;
 	int dart_dmg;
 	Vector m_direction;
@@ -58,8 +57,7 @@ CPhysicsDart* CPhysicsDart::PhysDartCreate(string_t customammotype, Vector VecSp
 	pBolt->pev->angles = vecDir;
 	pBolt->m_muzzlevelocity = drt_speed;
 	pBolt->dart_dmg = drt_dmg;
-	pBolt->dart_spread = drt_speed;
-	pBolt->dart_spread = drt_spread
+	pBolt->dart_spread = drt_spread;
 	pBolt->pev->gravity = 0.5;
 	pBolt->pev->friction = 0.8;
 	pBolt->ammotype = customammotype;
