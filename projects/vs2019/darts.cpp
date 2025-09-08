@@ -51,7 +51,7 @@ CPhysicsDart* CPhysicsDart::PhysDartCreate(string_t customammotype, Vector VecSp
 	CPhysicsDart* pBolt = GetClassPtr((CPhysicsDart*)NULL);
 	pBolt->pev->classname = MAKE_STRING("bolt");
 	pBolt->Spawn();
-	pBolt->pev->origin = vecSpawnPos;
+	pBolt->pev->origin = VecSpawnPos;
 	pBolt->m_direction = vecDir;
 	vecDir.x *= -1;
 	pBolt->pev->angles = vecDir;
@@ -108,7 +108,7 @@ CDart* CDart::DartCreate(string_t customammotype, Vector VecSpawnPos, Vector vec
 	pBolt->pev->classname = MAKE_STRING("bolt");
 	pBolt->Spawn();
 	pBolt->ammotype = customammotype;
-	pBolt->pev->origin = vecSpawnPos;
+	pBolt->pev->origin = VecSpawnPos;
 	pBolt->m_direction = vecDir;
 	vecDir.x *= -1;
 	pBolt->pev->angles = vecDir;
