@@ -1189,13 +1189,8 @@ void CSentry::Spawn()
 void CSentry::Shoot(Vector& vecSrc, Vector& vecDirToEnemy)
 {
 	//FireBullets(1, vecSrc, vecDirToEnemy, TURRET_SPREAD, TURRET_RANGE, BULLET_MONSTER_MP5, 1);
-	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
-	pDart->pev->origin = vecSrc;
-	pDart->pev->angles = vecDirToEnemy;
-
-	pDart->pev->velocity = vecDirToEnemy * DART_AIR_VELOCITY;
-	pDart->pev->speed = DART_AIR_VELOCITY;
-	pDart->pev->avelocity.z = 10;
+	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, vecDirToEnemy, 0.2, 50, 2600);
+	pDart->pev->owner = edict();
 	switch (RANDOM_LONG(0, 2))
 	{
 	case 0:
