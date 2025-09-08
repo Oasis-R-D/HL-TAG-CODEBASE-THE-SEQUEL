@@ -457,7 +457,7 @@ class CDart : public CBaseEntity
 	string_t ammotype;
 
 public:
-	static CDart* DartCreate(string_t customammotype);
+	static CDart* DartCreate(string_t customammotype, Vector VecSpawnPos, Vector vecDir, float drt_spread, int drt_dmg, int drt_speed);
 };
 #endif
 
