@@ -135,15 +135,8 @@ void CReckonMKIII::PrimaryAttack()
 		Vector anglesAim = m_pPlayer->pev->v_angle + m_pPlayer->pev->punchangle;
 		UTIL_MakeVectors(anglesAim);
 
-		CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
-		pDart->pev->origin = vecSrc;
-		anglesAim.x *= -1; //cuz for some reason pitch angle is inverted in this model
-		pDart->pev->angles = anglesAim;
+		CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, anglesAim, 0.1, 50, 2600);
 		pDart->pev->owner = m_pPlayer->edict();
-
-		pDart->pev->velocity = vecDir * DART_AIR_VELOCITY;
-		pDart->pev->speed = DART_AIR_VELOCITY;
-		pDart->pev->avelocity.z = 10;
 #endif
 
 	int flags;
