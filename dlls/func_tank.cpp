@@ -754,7 +754,6 @@ void CFuncTankGun::Fire(const Vector& barrelEnd, const Vector& forward, entvars_
 					// FireBullets(1, barrelEnd, forward, gTankSpread[m_spread], 4096, BULLET_MONSTER_9MM, 1, m_iBulletDamage, pevAttacker);
 					Vector anglesAim = pev->angles;
 					UTIL_MakeVectors(anglesAim);
-					CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
 					CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), barrelEnd, anglesAim, 0.1, 50, 2600);
 				}
 						break;
@@ -764,7 +763,6 @@ void CFuncTankGun::Fire(const Vector& barrelEnd, const Vector& forward, entvars_
 							//FireBullets(1, barrelEnd, forward, gTankSpread[m_spread], 4096, BULLET_MONSTER_MP5, 1, m_iBulletDamage, pevAttacker);
 							Vector anglesAim = pev->angles;
 							UTIL_MakeVectors(anglesAim);
-							CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
 							CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), barrelEnd, anglesAim, 0.1, 50, 2600);
 						}
 					break;
@@ -774,7 +772,6 @@ void CFuncTankGun::Fire(const Vector& barrelEnd, const Vector& forward, entvars_
 						//FireBullets(1, barrelEnd, forward, gTankSpread[m_spread], 4096, BULLET_MONSTER_12MM, 1, m_iBulletDamage, pevAttacker);
 						Vector anglesAim = pev->angles;
 						UTIL_MakeVectors(anglesAim);
-						CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"));
 						CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), barrelEnd, anglesAim, 0.1, 50, 2600);
 					}
 					break;
