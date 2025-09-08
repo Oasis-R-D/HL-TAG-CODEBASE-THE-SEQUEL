@@ -179,7 +179,7 @@ void CDart::DartTouch(CBaseEntity* pOther)
 	if (DartCounter <= 75)
 	{
 		DartCounter++;
-		CPhysicsDart* physdart = CPhysicsDart::PhysDartCreate(ammotype, pev->origin, pev->angles, 0, dart_dmg, pev->velocity); // no idea what this does
+		CPhysicsDart* physdart = CPhysicsDart::PhysDartCreate(ammotype, pev->origin, pev->angles, 0, dart_dmg, pev->speed); // no idea what this does
 		physdart->pev->owner = pev->owner;
 		pev->nextthink = gpGlobals->time;
 		SUB_Remove();
