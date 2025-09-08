@@ -455,6 +455,10 @@ class CDart : public CBaseEntity
 	float m_flDieTime;
 	bool inactive; // whether this dart is just a pickable dart or is flying through the air
 	string_t ammotype;
+	int dart_spread;
+	int dart_dmg;
+	Vector m_direction;
+	int m_muzzlevelocity;
 
 public:
 	static CDart* DartCreate(string_t customammotype, Vector VecSpawnPos, Vector vecDir, float drt_spread, int drt_dmg, int drt_speed);
