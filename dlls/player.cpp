@@ -4127,7 +4127,7 @@ void CBasePlayer::UpdateClientData()
 		m_iClientHealth = pev->health;
 	}
 
-
+	//int m_iClientMoney;
 	if (pev->armorvalue != m_iClientBattery)
 	{
 		m_iClientBattery = pev->armorvalue;
@@ -4138,7 +4138,16 @@ void CBasePlayer::UpdateClientData()
 		WRITE_SHORT((int)pev->armorvalue);
 		MESSAGE_END();
 	}
+	if (m_iServerMoney != m_iClientMoney)
+	{
+		m_iClientMoney = m_iServerMoney;
 
+		ASSERT(gmsgMoney > 0);
+		// send "money" update message
+		MESSAGE_BEGIN(MSG_ONE, gmsgMoney, NULL, pev);
+		WRITE_SHORT((int)m_iServerMoney);
+		MESSAGE_END();
+	}
 	if (m_WeaponBits != m_ClientWeaponBits)
 	{
 		m_ClientWeaponBits = m_WeaponBits;
