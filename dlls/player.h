@@ -174,6 +174,7 @@ public:
 	int m_iUpdateTime;	  // stores the number of frame ticks before sending HUD update messages
 	int m_iClientHealth;  // the health currently known by the client.  If this changes, send a new
 	int m_iClientBattery; // the Battery currently known by the client.  If this changes, send a new
+	int m_iClientMoney;
 	int m_iHideHUD;		  // the players hud weapon info is to be hidden
 	int m_iClientHideHUD;
 	int m_iFOV;		  // field of view
