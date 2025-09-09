@@ -266,7 +266,9 @@ void W_Precache()
 	giAmmoIndex = 0;
 
 	// custom items...
-
+	PRECACHE_MODEL("models/bigdart.mdl");
+	PRECACHE_MODEL("models/circdart.mdl");
+	PRECACHE_MODEL("models/bludart.mdl");
 	// common world objects
 	UTIL_PrecacheOther("item_suit");
 	UTIL_PrecacheOther("item_battery");
