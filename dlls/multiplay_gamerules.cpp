@@ -526,18 +526,26 @@ void CHalfLifeMultiplay::PlayerKilled(CBasePlayer* pVictim, entvars_t* pKiller, 
 
 	if (pVictim->pev == pKiller)
 	{ // killed self
-		pKiller->frags -= 1;
+		pKiller->m_iServerMoney -= 4;
 	}
 	else if (ktmp && ktmp->IsPlayer())
 	{
 		// if a player dies in a deathmatch game and the killer is a client, award the killer some points
 		pKiller->frags += IPointsForKill(peKiller, pVictim);
-
+		pKiller->m_iServerMoney += 8;
+		if ((pVictim->frags)/(pVictim->m_iDeaths) > (pKiller->frags)/(pKiller->m_iDeaths))) // KO a better opp
+		{
+			pKiller->m_iServerMoney += 2;
+		}
+		else if	(pKiller->frags == 0) // first KO
+		{
+			pKiller->m_iServerMoney += 2;
+		}
 		FireTargets("game_playerkill", ktmp, ktmp, USE_TOGGLE, 0);
 	}
 	else
 	{ // killed by the world
-		pKiller->frags -= 1;
+		pKiller->m_iServerMoney -= 4;
 	}
 
 	// update the scores
@@ -563,9 +571,6 @@ void CHalfLifeMultiplay::PlayerKilled(CBasePlayer* pVictim, entvars_t* pKiller, 
 		WRITE_SHORT(0);
 		WRITE_SHORT(GetTeamIndex(PK->m_szTeamName) + 1);
 		MESSAGE_END();
-
-		// let the killer paint another decal as soon as he'd like.
-		PK->m_flNextDecalTime = gpGlobals->time;
 	}
 }
 
