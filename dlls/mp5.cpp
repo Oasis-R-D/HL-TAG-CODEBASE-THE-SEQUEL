@@ -135,7 +135,7 @@ void CReckonMKIII::PrimaryAttack()
 		Vector anglesAim = m_pPlayer->pev->v_angle + m_pPlayer->pev->punchangle;
 		UTIL_MakeVectors(anglesAim);
 
-		CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, anglesAim, 0.1, 50, 2600);
+		CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, vecDir, CONE_3DEGREES, 50, 2600);
 		pDart->pev->owner = m_pPlayer->edict();
 #endif
 

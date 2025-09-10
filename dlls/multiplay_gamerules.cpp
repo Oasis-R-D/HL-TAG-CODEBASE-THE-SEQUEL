@@ -533,11 +533,11 @@ void CHalfLifeMultiplay::PlayerKilled(CBasePlayer* pVictim, entvars_t* pKiller, 
 		// if a player dies in a deathmatch game and the killer is a client, award the killer some points
 		pKiller->frags += IPointsForKill(peKiller, pVictim);
 		peKiller->m_iServerMoney += 8;
-		if ((pVictim->frags)/(pVictim->m_iDeaths) > (pKiller->frags)/(peKiller->m_iDeaths))) // KO a better opp
+		if ((pVictim->pev->frags)/(pVictim->m_iDeaths) > (peKiller->pev->frags)/(peKiller->m_iDeaths)) // KO a better opp
 		{
 			peKiller->m_iServerMoney += 2;
 		}
-		else if	(pKiller->frags == 0) // first KO
+		else if	(peKiller->pev->frags == 0) // first KO
 		{
 			peKiller->m_iServerMoney += 2;
 		}

@@ -34,6 +34,7 @@ void CPhysicsDart::Spawn()  // TODO: dart type model change, circdart gets a sli
 	SET_MODEL(ENT(pev), "models/bludart.mdl");
 	pev->velocity = (m_direction + Vector(RANDOM_FLOAT(dart_spread, -dart_spread), RANDOM_FLOAT(dart_spread, -dart_spread), RANDOM_FLOAT(dart_spread, -dart_spread))) * m_muzzlevelocity; // Applies spread and velocity
 	pev->avelocity.z = 10; // I have no clue what this is for
+	pev->angles = Vector(-(pev->velocity.x), pev->velocity.y, pev->velocity.z);
 	pev->speed = m_muzzlevelocity;
 	pev->movetype = MOVETYPE_BOUNCE;
 	pev->solid = SOLID_BBOX;
@@ -54,8 +55,6 @@ CPhysicsDart* CPhysicsDart::PhysDartCreate(string_t customammotype, Vector VecSp
 	
 	pBolt->pev->origin = VecSpawnPos;
 	pBolt->m_direction = vecDir;
-	vecDir.x *= -1;
-	pBolt->pev->angles = vecDir;
 	pBolt->m_muzzlevelocity = drt_speed;
 	pBolt->dart_dmg = drt_dmg;
 	pBolt->dart_spread = drt_spread;
@@ -111,8 +110,6 @@ CDart* CDart::DartCreate(string_t customammotype, Vector VecSpawnPos, Vector vec
 	pBolt->ammotype = customammotype;
 	pBolt->pev->origin = VecSpawnPos;
 	pBolt->m_direction = vecDir;
-	vecDir.x *= -1;
-	pBolt->pev->angles = vecDir;
 	pBolt->m_muzzlevelocity = drt_speed;
 	pBolt->dart_dmg = drt_dmg;
 	pBolt->dart_spread = drt_spread;
@@ -132,6 +129,7 @@ void CDart::Spawn()
 	SET_MODEL(ENT(pev), "models/bludart.mdl");
 	pev->velocity = (m_direction + Vector(RANDOM_FLOAT(dart_spread, -dart_spread), RANDOM_FLOAT(dart_spread, -dart_spread), RANDOM_FLOAT(dart_spread, -dart_spread))) * m_muzzlevelocity; // Applies spread and velocity
 	pev->avelocity.z = 10; // I have no clue what this is for
+	pev->angles = Vector(-(pev->velocity.x), pev->velocity.y, pev->velocity.z);
 	pev->speed = m_muzzlevelocity;
 	UTIL_SetSize(pev, Vector(0, 0, 0), Vector(0, 0, 0));
 

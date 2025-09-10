@@ -173,7 +173,7 @@ void CPython::PrimaryAttack()
 	UTIL_MakeVectors(anglesAim);
 	Vector vecSrc = m_pPlayer->GetGunPosition() - gpGlobals->v_up * 2;
 
-	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, anglesAim, 0.1, 50, 2600);
+	CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, vecAiming, CONE_20DEGREES, 50, 2600);
 	
 	pDart->pev->owner = m_pPlayer->edict();
 #endif

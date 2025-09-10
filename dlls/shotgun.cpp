@@ -133,7 +133,7 @@ void CShotgun::PrimaryAttack()
 		else
 			vecSrc = vecSrc - gpGlobals->v_right * 2;
 		
-		CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, anglesAim, 0.2, 50, 2600);	
+		CDart* pDart = CDart::DartCreate(ALLOC_STRING("9mm"), vecSrc, anglesAim, CONE_5DEGREES, 50, 2600);	
 		pDart->pev->owner = m_pPlayer->edict();
 	}
 #endif
